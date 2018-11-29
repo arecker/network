@@ -1,0 +1,3 @@
+- name: restart
+  service: name="smbd" state="restarted" enabled="true"
+  become: true

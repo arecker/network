@@ -1,0 +1,10 @@
+- name: package
+  package: name="samba" state="present"
+  become: true
+- name: config
+  template: src="templates/smb.conf.j2" dest="/etc/samba/smb.conf" owner="root" group="root" mode="644"
+  become: true
+  notify: [restart]
+- name: service
+  service: name="smbd" state="started" enabled="true"
+  become: true

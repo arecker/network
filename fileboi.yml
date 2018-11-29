@@ -2,6 +2,7 @@
 - hosts: fileboi
   roles:
     - base
+    - samba
 
   tasks:
     - package: name="mdadm" state="present"

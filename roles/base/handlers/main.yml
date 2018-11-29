@@ -7,4 +7,3 @@
 - name: mount
   command: mount -a
   become: true
-  warn: false
