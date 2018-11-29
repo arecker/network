@@ -6,9 +6,13 @@
 - name: motd
   template: src="templates/motd.j2" dest="/etc/motd" owner="root" group="root" mode="644"
   become: true
-- name: disable ipv6
+- name: ipv6
   template: src="templates/disable-ipv6.conf.j2" dest="/etc/sysctl.d/70-disable-ipv6.conf" owner="root" group="root" mode="644"
   become: true
   notify: [reload sysctl]
+- name: apt
+  template: src="templates/sources.list.j2" dest="/etc/apt/sources.list" owner="root" group="root" mode="644"
+  become: true
+- debug: msg="{{ ansible_architecture }}"
 - name: bashrc
   template: src="templates/bashrc.sh.j2" dest="~/.bashrc" mode="644"
