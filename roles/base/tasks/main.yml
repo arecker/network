@@ -1,0 +1,14 @@
+---
+- name: sshd_config
+  template: src="templates/sshd_config.j2" dest="/etc/ssh/sshd_config" owner="root" group="root" mode="644"
+  become: true
+  notify: [restart ssh]
+- name: motd
+  template: src="templates/motd.j2" dest="/etc/motd" owner="root" group="root" mode="644"
+  become: true
+- name: disable ipv6
+  template: src="templates/disable-ipv6.conf.j2" dest="/etc/sysctl.d/70-disable-ipv6.conf" owner="root" group="root" mode="644"
+  become: true
+  notify: [reload sysctl]
+- name: bashrc
+  template: src="templates/bashrc.sh.j2" dest="~/.bashrc" mode="644"

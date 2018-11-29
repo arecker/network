@@ -1,0 +1,6 @@
+- name: restart ssh
+  service: name="ssh" state="restarted" enabled="true"
+  become: true
+- name: reload sysctl
+  command: sysctl -p -f /etc/sysctl.d/70-disable-ipv6.conf
+  become: true
