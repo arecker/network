@@ -13,6 +13,18 @@
 - name: apt
   template: src="templates/sources.list.j2" dest="/etc/apt/sources.list" owner="root" group="root" mode="644"
   become: true
-- debug: msg="{{ ansible_architecture }}"
+- name: fstab
+  template: src="templates/fstab.j2" dest="/etc/fstab" owner="root" group="root" mode="644"
+  become: true
+  notify: [mount]
+- name: install some tools
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - curl
+    - dnsutils
+    - htop
+    - nmap
+    - screen
 - name: bashrc
   template: src="templates/bashrc.sh.j2" dest="~/.bashrc" mode="644"
