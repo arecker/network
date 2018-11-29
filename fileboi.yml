@@ -2,3 +2,7 @@
 - hosts: fileboi
   roles:
     - base
+
+  tasks:
+    - package: name="mdadm" state="present"
+      become: true

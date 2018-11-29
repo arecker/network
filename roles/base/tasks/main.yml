@@ -17,7 +17,13 @@
   template: src="templates/fstab.j2" dest="/etc/fstab" owner="root" group="root" mode="644"
   become: true
   notify: [mount]
-- name: install some tools
+- name: bluetooth package
+  package: name="bluez" state="absent"
+  become: true
+- name: bluetooth service
+  service: name="bluetooth" state="stopped" enabled="false"
+  become: true
+- name: tools
   package: name="{{ item }}" state="present"
   become: true
   with_items:
