@@ -32,6 +32,7 @@
     - curl
     - dnsutils
     - htop
+    - iotop
     - nmap
     - screen
 - name: bashrc

@@ -19,5 +19,3 @@
       become: true
     - file: path="/data" state="directory" owner="root" group="root" mode="644"
       become: true
-    - mount: path="/data" src="/dev/md0" fstype="xfs" state="present"
-      become: true
