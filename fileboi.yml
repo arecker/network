@@ -7,3 +7,17 @@
   tasks:
     - package: name="mdadm" state="present"
       become: true
+    - package: name="xfsprogs" state="present"
+      become: true
+    - copy:
+        dest: /etc/mdadm/mdadm.conf
+        owner: root
+        group: root
+        mode: 644
+        content: |
+          ARRAY /dev/md0 metadata=1.2 name=fileboi:0 UUID=95077768:4ae142ef:f235fcd1:54b622d1
+      become: true
+    - file: path="/data" state="directory" owner="root" group="root" mode="644"
+      become: true
+    - mount: path="/data" src="/dev/md0" fstype="xfs" state="present"
+      become: true

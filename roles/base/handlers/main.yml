@@ -4,6 +4,3 @@
 - name: reload sysctl
   command: sysctl -p -f /etc/sysctl.d/70-disable-ipv6.conf
   become: true
-- name: mount
-  command: mount -a
-  become: true
