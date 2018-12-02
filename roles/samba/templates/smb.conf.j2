@@ -15,15 +15,3 @@ passwd program = /usr/bin/passwd %u
 passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
 pam password change = yes
 map to guest = bad user
-
-[reckerdrive]
-comment = reckerdrive
-path = /data/reckerdrive
-writeable = Yes
-browseable = Yes
-create mask = 0644
-directory mask = 0755
-force user = alex
-force group = alex
-read only = No
-guest ok = Yes
