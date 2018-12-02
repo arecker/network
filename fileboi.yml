@@ -17,5 +17,5 @@
         content: |
           ARRAY /dev/md0 metadata=1.2 name=fileboi:0 UUID=95077768:4ae142ef:f235fcd1:54b622d1
       become: true
-    - file: path="/data" state="directory" owner="root" group="root" mode="644"
+    - file: path="/data" state="directory" owner="root" group="root" mode="755"
       become: true

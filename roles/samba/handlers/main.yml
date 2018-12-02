@@ -1,3 +1,6 @@
-- name: restart
+- name: restart smbd
   service: name="smbd" state="restarted" enabled="true"
+  become: true
+- name: restart nmbd
+  service: name="nmbd" state="restarted" enabled="true"
   become: true
