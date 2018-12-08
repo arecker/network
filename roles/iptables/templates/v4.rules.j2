@@ -2,10 +2,11 @@
 
 *filter
 {% if ansible_hostname == "secretboi" -%}
--P INPUT ACCEPT
--P FORWARD ACCEPT
--P OUTPUT ACCEPT
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT ALLOW
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -d {{ lan_cidr }} -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
 -A OUTPUT -o tun0 -p icmp -j ACCEPT
 -A OUTPUT -d {{ lan_cidr }} -j ACCEPT
