@@ -5,5 +5,5 @@ proc /proc proc defaults 0 0
 {% if ansible_hostname == "fileboi" -%}
 /dev/md0 /data xfs defaults,nofail 0 2
 {% elif ansible_hostname == "secretboi" -%}
-//fileboi/downloads /data/downloads cifs guest,uid=debian-deluged,iocharset=utf8,vers=1.0 0 0
+//fileboi/downloads /data/downloads cifs _netdev,guest,uid=debian-deluged,iocharset=utf8,vers=1.0 0 0
 {% endif -%}
