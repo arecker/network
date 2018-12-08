@@ -4,7 +4,7 @@
 Description=Deluge Bittorrent Client Daemon
 Documentation=man:deluged
 After=network-online.target
-ConditionPathIsMountPoint=/data/downloads
+RequiresMountsFor=/var/lib/deluged/Downloads
 
 [Service]
 Type=simple

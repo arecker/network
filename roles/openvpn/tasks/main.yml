@@ -1,0 +1,20 @@
+- name: package
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - openvpn
+- name: certs
+  copy: src="files/{{ item }}" dest="/etc/openvpn/{{ item }}" owner="root" group="root" mode="644"
+  become: true
+  with_items:
+    - ca.rsa.2048.crt
+    - crl.rsa.2048.pem
+  notify: [ reload openvpn ]
+- name: config
+  template: src="templates/openvpn.conf.j2" dest="/etc/openvpn/pia.conf" owner="root" group="root" mode="644"
+  become: true
+  notify: [ reload openvpn ]
+- name: environment
+  template: src="templates/openvpn.env.j2" dest="/etc/default/openvpn" owner="root" group="root" mode="644"
+  become: true
+  notify: [ reload openvpn ]
