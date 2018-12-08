@@ -1,0 +1,14 @@
+- name: package
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - iptables
+    - iptables-persistent
+- name: ipv4 config
+  template: src="templates/v4.rules.j2" dest="/etc/iptables/rules.v4" owner="root" group="root" mode="644"
+  become: true
+  notify: [ flush iptables ]
+- name: ipv6 config
+  template: src="templates/v6.rules.j2" dest="/etc/iptables/rules.v6" owner="root" group="root" mode="644"
+  become: true
+  notify: [ flush iptables ]

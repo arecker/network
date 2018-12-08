@@ -1,0 +1,3 @@
+- name: flush iptables
+  script: files/flush.sh
+  become: true

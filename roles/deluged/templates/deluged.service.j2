@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Deluge Bittorrent Client Daemon
+Documentation=man:deluged
+After=network-online.target
+ConditionPathIsMountPoint=/data/downloads
+
+[Service]
+Type=simple
+User=debian-deluged
+Group=debian-deluged
+UMask=007
+ExecStart=/usr/bin/deluged -d
+Restart=on-failure
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
