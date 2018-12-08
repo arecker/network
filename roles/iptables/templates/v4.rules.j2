@@ -3,8 +3,8 @@
 *filter
 {% if ansible_hostname == "secretboi" -%}
 -P INPUT ACCEPT
--P FORWARD DROP
--P OUTPUT DROP
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
 -A OUTPUT -o tun0 -p icmp -j ACCEPT
