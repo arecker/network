@@ -4,7 +4,7 @@
 {% if ansible_hostname == "secretboi" -%}
 -P INPUT DROP
 -P FORWARD DROP
--P OUTPUT ALLOW
+-P OUTPUT ACCEPT
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -d {{ lan_cidr }} -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
