@@ -13,7 +13,7 @@
 {% for server in dns_servers -%}
 -A OUTPUT -d {{ server }} -j ACCEPT
 {% endfor-%}
--A OUTPUT -p udp -m udp --dport 1194 -j ACCEPT
+-A OUTPUT -p udp -m udp --dport 1198 -j ACCEPT
 -A OUTPUT -o tun0 -j ACCEPT
 {% else %}
 -P INPUT ACCEPT
