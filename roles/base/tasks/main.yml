@@ -25,6 +25,7 @@
 - name: bluetooth service
   service: name="bluetooth" state="stopped"
   become: true
+  when: ansible_architecture == "armv7l"
 - name: tools
   package: name="{{ item }}" state="present"
   become: true

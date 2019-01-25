@@ -1,9 +1,15 @@
 # {{ ansible_managed }}
+{% if ansible_hostname == "fileboi" -%}
 proc /proc proc defaults 0 0
 /dev/mmcblk0p6 /boot vfat defaults 0 2
 /dev/mmcblk0p7 / ext4 defaults,noatime 0 1
-{% if ansible_hostname == "fileboi" -%}
 /dev/md0 /data xfs defaults,nofail 0 2
 {% elif ansible_hostname == "secretboi" -%}
+proc /proc proc defaults 0 0
+/dev/mmcblk0p6 /boot vfat defaults 0 2
+/dev/mmcblk0p7 / ext4 defaults,noatime 0 1
 //fileboi/downloads /var/lib/deluged/Downloads cifs _netdev,guest,uid=debian-deluged,iocharset=utf8,vers=1.0 0 0
+{% elif ansible_hostname == "routerboi" -%}
+UUID=49542fcb-6f59-4509-b7bc-f08933be8680 / ext4 errors=remount-ro 0 1
+UUID=d3f5ce17-3988-4b32-8438-4216cc65dba0 none swap sw 0 0
 {% endif -%}

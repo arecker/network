@@ -1,4 +1,8 @@
 # {{ ansible_managed }}
 {% if ansible_architecture == "armv7l" -%}
 deb http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi
+{% else %}
+deb http://deb.debian.org/debian stretch main contrib non-free
+deb http://deb.debian.org/debian-security/ stretch/updates main contrib non-free
+deb http://deb.debian.org/debian stretch-updates main contrib non-free
 {% endif -%}

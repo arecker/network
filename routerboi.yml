@@ -1,0 +1,4 @@
+---
+- hosts: routerboi
+  roles:
+    - base
