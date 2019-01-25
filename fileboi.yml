@@ -19,3 +19,6 @@
       become: true
     - file: path="/data" state="directory" owner="root" group="root" mode="755"
       become: true
+    - name: samba
+      package: name="samba-client" state="present"
+      become: true

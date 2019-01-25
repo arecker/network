@@ -4,20 +4,17 @@
   become: true
   notify: [restart ssh]
 - name: motd
-  template: src="templates/motd.j2" dest="/etc/motd" owner="root" group="root" mode="644"
+  template: src="templates/motd.{{ ansible_hostname }}.j2" dest="/etc/motd" owner="root" group="root" mode="644"
   become: true
 - name: ipv6
   template: src="templates/disable-ipv6.conf.j2" dest="/etc/sysctl.d/70-disable-ipv6.conf" owner="root" group="root" mode="644"
   become: true
   notify: [reload sysctl]
 - name: apt
-  template: src="templates/sources.list.j2" dest="/etc/apt/sources.list" owner="root" group="root" mode="644"
-  become: true
-- name: samba
-  package: name="samba-client" state="present"
+  template: src="templates/sources.list.{{ ansible_architecture }}.j2" dest="/etc/apt/sources.list" owner="root" group="root" mode="644"
   become: true
 - name: fstab
-  template: src="templates/fstab.j2" dest="/etc/fstab" owner="root" group="root" mode="644"
+  template: src="templates/fstab.{{ ansible_hostname }}.j2" dest="/etc/fstab" owner="root" group="root" mode="644"
   become: true
 - name: bluetooth package
   package: name="bluez" state="absent"
