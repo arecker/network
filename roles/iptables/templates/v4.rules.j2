@@ -6,6 +6,7 @@
 -P FORWARD DROP
 -P OUTPUT DROP
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -d 127.0.0.1 -j ACCEPT
 -A INPUT -d {{ lan_cidr }} -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
 -A OUTPUT -o tun0 -p icmp -j ACCEPT
