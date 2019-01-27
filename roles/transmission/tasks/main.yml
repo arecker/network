@@ -1,0 +1,16 @@
+- name: package
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - transmission-daemon
+- name: memory limit
+  template: src="templates/memory-limit.conf.j2" dest="/etc/sysctl.d/80-memory-limit.conf" owner="root" group="root" mode="644"
+  become: true
+  notify: [reload sysctl]
+- name: service
+  systemd: name="transmission-daemon" enabled="true" state="started"
+  become: true
+- name: config
+  template: src="templates/settings.json.j2" dest="/tmp/settings.json" owner="debian-transmission" group="debian-transmission" mode="644"
+  become: true
+  notify: [ restart transmission ]

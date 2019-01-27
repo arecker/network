@@ -1,24 +1,13 @@
 # {{ ansible_managed }}
 
 *filter
-{% if ansible_hostname == "secretboi" -%}
--P INPUT DROP
--P FORWARD DROP
--P OUTPUT DROP
--A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A INPUT -d 127.0.0.1 -j ACCEPT
--A INPUT -d {{ lan_cidr }} -j ACCEPT
--A OUTPUT -o lo -j ACCEPT
--A OUTPUT -o tun0 -p icmp -j ACCEPT
--A OUTPUT -d {{ lan_cidr }} -j ACCEPT
-{% for server in dns_servers -%}
--A OUTPUT -d {{ server }} -j ACCEPT
-{% endfor-%}
--A OUTPUT -p udp -m udp --dport 1198 -j ACCEPT
--A OUTPUT -o tun0 -j ACCEPT
-{% else %}
 -P INPUT ACCEPT
 -P FORWARD ACCEPT
 -P OUTPUT ACCEPT
+{% if ansible_hostname == "secretboi" -%}
+-A OUTPUT -m owner --uid-owner debian-transmission -o lo -j ACCEPT
+-A OUTPUT -m owner --uid-owner debian-transmission -o tun0 -j ACCEPT
+-A OUTPUT -m owner --uid-owner debian-transmission -d 10.0.0.0/16 -j ACCEPT
+-A OUTPUT -m owner --uid-owner debian-transmission -j DROP
 {% endif -%}
 COMMIT

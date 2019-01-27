@@ -1,0 +1,6 @@
+- name: restart transmission
+  script: files/reconfigure.sh
+  become: true
+- name: reload sysctl
+  command: sysctl -p -f /etc/sysctl.d/80-memory-limit.conf
+  become: true
