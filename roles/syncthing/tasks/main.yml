@@ -1,0 +1,11 @@
+- name: key
+  apt_key: url="https://ftp-master.debian.org/keys/archive-key-6.0.asc" state="present"
+  become: True
+
+- name: apt
+  template: src="templates/apt.list.j2" dest="/etc/apt/sources.list.d/syncthing.list"
+  become: True
+
+- name: package
+  package: name="syncthing" state="present"
+  become: True

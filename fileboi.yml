@@ -3,6 +3,7 @@
   roles:
     - base
     - samba
+    - syncthing
 
   tasks:
     - package: name="mdadm" state="present"
